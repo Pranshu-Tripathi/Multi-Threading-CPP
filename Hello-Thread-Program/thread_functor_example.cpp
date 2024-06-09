@@ -12,6 +12,9 @@ class Hello {
         ~Hello() {
             std::cout << "Hello destructor." << std::endl;
         }
+        void classMethodEntryPoint() {
+            std::cout << "ClassMethodEntryPoint was the entry point." << std::endl;
+        }
 };
 
 int main() {
@@ -26,5 +29,8 @@ int main() {
         }
     );
     lambda_thr.join();
+
+    std::thread class_mtd_entry_thr(&Hello::classMethodEntryPoint, &hello);
+    class_mtd_entry_thr.join();
     return 0;
 }
